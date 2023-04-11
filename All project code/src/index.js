@@ -62,6 +62,10 @@ app.get("/", (req, res) => {
   res.render("pages/home");
 });
 
+app.get("/test", (req, res) => {
+  res.render("pages/test");
+});
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/logout");
