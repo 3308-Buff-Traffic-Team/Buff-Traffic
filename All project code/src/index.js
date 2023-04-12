@@ -66,6 +66,10 @@ app.get("/test", (req, res) => {
   res.render("pages/test");
 });
 
+app.get('/welcome', (req, res) => {
+  res.json({status: 'success', message: 'Welcome!'});
+});
+
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.render("pages/logout");
