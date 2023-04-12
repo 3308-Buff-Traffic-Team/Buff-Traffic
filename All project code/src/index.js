@@ -104,6 +104,9 @@ app.post('/login', (req, res) => {
     });
 });
 
+
 module.exports = app.listen(3000);
 //app.listen(3000);
+
+
 console.log("Server is listening on port 3000");
