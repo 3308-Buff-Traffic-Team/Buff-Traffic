@@ -46,8 +46,9 @@ app.use(
 );
 
 const user = {
-  student_id: undefined
-  // username: undefined,
+  student_id: undefined,
+  username: undefined,
+  password: undefined
   // first_name: undefined,
   // last_name: undefined,
   // email: undefined,
@@ -75,6 +76,35 @@ app.get("/logout", (req, res) => {
   res.render("pages/logout");
 });
 
+app.get('/login'){
+  res.render('/src/views/pages/login.ejs');
+};
+
+app.post('/login'){
+  const query = `select username,password from users where username = $1;`;
+  
+  db.any(query, [req.body.username])
+    .then(async (data) => {
+      user = data[0];
+      console.log(user);
+      if (data[0]){
+        // const match = await bcrypt.compare(req.body.password, data[0].password);
+        if ((req.body.username == data[0].username) && (req.body.password == data[0].password)){
+          req.session.user = data[0];
+          req.session.save();
+          return res.redirect('/');
+        } else {
+          return res.redirect('/register');
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.redirect('/login');
+    });
+};
+
 //app.listen(3000);
 module.exports = app.listen(3000);
+
 console.log("Server is listening on port 3000");
