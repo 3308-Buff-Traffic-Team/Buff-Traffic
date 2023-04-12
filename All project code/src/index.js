@@ -46,7 +46,7 @@ app.use(
 );
 
 const user = {
-  student_id: undefined,
+  user_id: undefined,
   username: undefined,
   password: undefined
   // first_name: undefined,
@@ -76,11 +76,11 @@ app.get("/logout", (req, res) => {
   res.render("pages/logout");
 });
 
-app.get('/login'){
-  res.render('/src/views/pages/login.ejs');
-};
+app.get('/login', (req, res) => {
+  res.render('/pages/login');
+});
 
-app.post('/login'){
+app.post('/login', (req, res) => {
   const query = `select username,password from users where username = $1;`;
   
   db.any(query, [req.body.username])
@@ -102,7 +102,8 @@ app.post('/login'){
       console.log(err);
       return res.redirect('/login');
     });
-};
+});
 
-app.listen(3000);
+module.exports = app.listen(3000);
+//app.listen(3000);
 console.log("Server is listening on port 3000");
