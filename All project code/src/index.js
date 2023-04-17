@@ -103,7 +103,6 @@ app.post('/login', (req, res) => {
   
   db.any(query, [req.body.email])
     .then(async (data) => {
-      console.log(data);
       if (data[0]){
         const match = await bcrypt.compare(req.body.password, data[0].password);
         if ((req.body.username == data[0].username) && (match)){
