@@ -5,7 +5,9 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const bcrypt = require('bcrypt');
 const axios = require('axios');
-
+const path = require('path')
+// To specify path for static files for UI
+app.use(express.static(path.join(__dirname,'/')));
 // db config
 const dbConfig = {
   host: "db",
@@ -85,6 +87,11 @@ app.get('/login', (req, res) => {
 });
 app.get('/register', (req, res) => {
   res.render('pages/register');
+});
+
+app.get('/profile', (req, res) => {
+  res.render('pages/profile');
+
 });
 app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
