@@ -10,7 +10,7 @@
 
 ---
 
-## Quick Documentation Guide for TA's
+## ⚡ Quick Documentation Guide for TA's
 
 For grading reference:
 - Release notes are generated via GitHub and are not stored in the "Milestone Submissions" folder.
