@@ -1,24 +1,48 @@
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
+    <!-- <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
             <h5 class="text-white h4">Put stuff here</h5>
             <span class="text-muted">Toggleable via the navbar brand.</span>
         </div>
     </div>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <div class="navbar-brand">
-                <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand"><img src="#" style="width: 25px" alt="Logo"></a>
-            </div>
-            <div class="d-flex justify-content-between">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" >Profile</a> </li>
-                </ul>
-            </div>
+    <nav id="navbar">
+            <a class="navbar-brand"><img src="#" style="width: 25px" alt="Logo"></a>
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" >Profile</a> </li>
+    </nav> -->
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #242323;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #nav-links ul {
+            list-style: none;
+            display: flex;
+        }
+        #nav-links li {
+            margin-left: 1rem;
+        }
+        #nav-links a {
+            text-decoration: none;
+            color: #ffd900;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+    </style>
+    <nav id="navbar">
+        <div class="logo">
+            <img src="#" style="width: 25px" alt="Logo">
         </div>
-    </nav>
+        <div id="nav-links">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Profile</a></li>
+          </ul>
+        </div>
+      </nav>
 </header>

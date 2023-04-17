@@ -49,11 +49,11 @@ app.use(
 
 var user = {
   user_id: undefined,
-  username: undefined,
-  password: undefined
+  // username: undefined,
+  password: undefined,
   // first_name: undefined,
   // last_name: undefined,
-  // email: undefined,
+  email: undefined
   // year: undefined,
   // major: undefined,
   // degree: undefined,
@@ -81,6 +81,7 @@ app.get("/logout", (req, res) => {
 
 app.get('/login', (req, res) => {
   res.render('pages/login');
+
 });
 app.get('/register', (req, res) => {
   res.render('pages/register');
@@ -102,20 +103,21 @@ app.post('/login', (req, res) => {
   
   db.any(query, [req.body.email])
     .then(async (data) => {
-      user = data[0];
-      console.log(user);
+      console.log(data);
       if (data[0]){
-        console.log("1");
         const match = await bcrypt.compare(req.body.password, data[0].password);
-        console.log("2");
         if ((req.body.username == data[0].username) && (match)){
           user.user_id = data[0].user_id;
-          req.session.user = data[0];
+          user.password = data[0].password;
+          user.email = data[0].email;
+          req.session.user = user;
           req.session.save();
           return res.redirect('/');
         } else {
           return res.redirect('/register');
         }
+      } else {
+        return res.redirect('/register');
       }
     })
     .catch((err) => {
