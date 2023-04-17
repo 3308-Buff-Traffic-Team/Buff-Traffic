@@ -1,5 +1,5 @@
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
+    <!-- <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
             <h5 class="text-white h4">Put stuff here</h5>
             <span class="text-muted">Toggleable via the navbar brand.</span>
@@ -9,5 +9,40 @@
             <a class="navbar-brand"><img src="#" style="width: 25px" alt="Logo"></a>
             <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#" >Profile</a> </li>
-    </nav>
+    </nav> -->
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #nav-links ul {
+            list-style: none;
+            display: flex;
+        }
+        #nav-links li {
+            margin-left: 1rem;
+        }
+        #nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+    </style>
+    <nav id="navbar">
+        <div class="logo">
+            <img src="#" style="width: 25px" alt="Logo">
+        </div>
+        <div id="nav-links">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Profile</a></li>
+          </ul>
+        </div>
+      </nav>
 </header>
