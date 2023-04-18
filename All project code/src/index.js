@@ -109,10 +109,12 @@ app.post('/register',  async (req, res) => {
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
   db.any(query, [req.body.email, hash])
     .then(function(data){
+      res.json({status: 'Success', message: 'Success'});
       res.status(200).redirect('/login');
     })
     .catch(err => {
-      alert(err);
+      // alert(err);
+      console.log(err);
     })
 });
 
@@ -131,6 +133,7 @@ app.post('/login', (req, res) => {
           req.session.save();
           return res.status(200).redirect('/home');
         } else {
+          res.json({status: 403, message: 'Incorrect user or password'});
           return res.status(403).redirect('/register');
         }
       } else {
