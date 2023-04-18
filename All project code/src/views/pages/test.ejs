@@ -6,5 +6,23 @@
     </head>
     <body>
         <h1>wow the page is up</h1>
+        <h2>Hello <%= user %></h2>
+        <h2>Register</h2>
+        <form method="POST" action="/register">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+            <label for="password">Password</label>
+            <input type="password" id="passwrod" name="password">
+            <button type="submit" value="Register">Register</button>
+        </form>
+        <br/>
+        <h2>Login</h2>
+        <form method="POST" action="/login">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+            <label for="password">Password</label>
+            <input type="password" id="passwrod" name="password">
+            <button type="submit" value="Login">Login</button>
+        </form>
     </body>
 </html>
