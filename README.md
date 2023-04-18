@@ -4,8 +4,6 @@
   <a href=""><img src="./All project code/src/resources/img/BT-Logo.png" alt="BuffTraffic Logo"></a>
 </h1>
 
-<h5 align="center">(Logo coming soon)</h5>
-
 <h4 align="center">Tracking the herd.</h4>
 
 ---
