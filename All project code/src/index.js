@@ -129,12 +129,13 @@ app.post('/login', (req, res) => {
           user.email = data[0].email;
           req.session.user = user;
           req.session.save();
-          return res.redirect('/');
+          return res.status(200).redirect('/home');
         } else {
-          return res.redirect('/register');
+          return res.status(403).redirect('/register');
         }
       } else {
-        return res.redirect('/register');
+        // alert("Invalid credentials");
+        return res.status(404).redirect('/register');
       }
     })
     .catch((err) => {
