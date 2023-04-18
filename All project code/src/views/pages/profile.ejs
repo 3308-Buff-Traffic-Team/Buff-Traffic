@@ -1,0 +1,76 @@
+<%- include ('../partials/navbar') %>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Profile Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .gradient-banner {
+      background: linear-gradient(to bottom, #CFB87C, #2E2E2C);
+      height: 150px;
+    }
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin-top: -50px;
+      margin-left: 20px;
+      float: left;
+      position: relative;
+    }
+
+    .profile-picture i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+    }
+
+    .profile-info {
+      margin-top: 50px;
+      margin-left: 140px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin: 0;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="gradient-banner"></div>
+  <div class="profile-picture">
+    <i class="fa fa-user fa-3x"></i>
+  </div>
+  <div class="profile-info">
+    <h1>My Profile</h1>
+    <h3>Boulder, CO</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum, ligula vel tristique blandit, nisl enim feugiat orci, at gravida libero enim sit amet lorem. Vestibulum et justo nec massa eleifend tristique. In hac habitasse platea dictumst. Sed at quam sit amet nunc ornare semper. </p>
+  </div>
+</body>
+
+</html>
+
+
+
+<%- include ('../partials/footer') %>
