@@ -79,13 +79,20 @@ app.get("/logout", (req, res) => {
   res.render("pages/logout");
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+
+});
+
 app.get('/login', (req, res) => {
   res.render('pages/login');
 
 });
+
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
+
 app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
