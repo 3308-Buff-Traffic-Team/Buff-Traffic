@@ -8,6 +8,9 @@ const axios = require('axios');
 
 app.use(express.static('resources'))
 
+const path = require('path')
+// To specify path for static files for UI
+app.use(express.static(path.join(__dirname,'/')));
 // db config
 const dbConfig = {
   host: "db",
@@ -66,6 +69,7 @@ var user = {
 app.get("/", (req, res) => {
   //res.render("pages/home");
   res.render("pages/test", {user: req.session.user.user_id });
+  console.log(user.user_id);
 });
 
 app.get("/test", (req, res) => {
@@ -93,6 +97,11 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
   res.render('pages/register');
+});
+
+app.get('/profile', (req, res) => {
+  res.render('pages/profile');
+
 });
 
 app.post('/register',  async (req, res) => {

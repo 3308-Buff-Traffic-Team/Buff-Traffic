@@ -1,35 +1,37 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/navbar') %>
 
-<main>
-  <div class="container" >
-    <form action="/register" method="POST">
-        <br><h1>Register</h1><br>
-        <div class="card border-light mb-3" style="max-width: 700px;">
-            <div class="row mb-3">
-                <div class="col-sm-2">
-                    <label for="email" class="form-label">Email</label>
-                </div>
-                <div class="col-sm-8">
-                    <input type="text" name="email" class="form-control" id="email" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-sm-2">
-                    <label for="password" class="form-label">Password</label>
-                </div>
-                <div class="col-sm-8">
-                    <input type="text" name="password" class="form-control" id="password" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-auto">
-                    <input type="submit" class="btn btn-primary float-right" value="Register">
-                </div>
-            </div>
-        </div>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../resources/css/style.css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+  
+  <title>Register Account</title>
+</head>
+
+<body>
+  <div class="main">
+    
+    <p class="sign" align="center">Create Account</p>
+    
+    <form action="/register" method ="POST">
+      <input class="un " type="text" align="center" name="email" placeholder="Username">
+      
+      <input class="pass" type="password" align="center" name="password" placeholder="Password">
+      
+      <button type="submit" class="submit" align="center">Register</button>
+      
     </form>
-  </div>
-</main>
+            
+                
+    </div>
+     
+</body>
+
+</html>
 
 <%- include ('../partials/footer') %>
