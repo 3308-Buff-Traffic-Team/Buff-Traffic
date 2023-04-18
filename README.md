@@ -1,7 +1,7 @@
 <h1 align="center">
   <br>
   Buff Traffic
-  <!-- <a href=""><img src="" alt="BuffTraffic Logo"></a> -->
+  <a href=""><img src="./All project code/src/resources/img/BT-Logo.png" alt="BuffTraffic Logo"></a>
 </h1>
 
 <h5 align="center">(Logo coming soon)</h5>
