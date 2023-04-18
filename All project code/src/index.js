@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+
+app.use(express.static('resources'))
+
 const path = require('path')
 // To specify path for static files for UI
 app.use(express.static(path.join(__dirname,'/')));
