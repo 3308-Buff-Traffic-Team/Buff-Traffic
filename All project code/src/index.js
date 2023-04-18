@@ -6,6 +6,8 @@ const session = require("express-session");
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
+app.use(express.static('resources'))
+
 // db config
 const dbConfig = {
   host: "db",
