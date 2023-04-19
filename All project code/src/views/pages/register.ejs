@@ -14,24 +14,22 @@
 </head>
 
 <body>
-  <div class="main">
-    
-    <p class="sign" align="center">Create Account</p>
-    
-    <form action="/register" method ="POST">
-      <input class="un " type="text" align="center" name="email" placeholder="Username">
-      
-      <input class="pass" type="password" align="center" name="password" placeholder="Password">
-      
-      <button type="submit" class="submit" align="center">Register</button>
-      
-    </form>
-            
-                
+    <% if (locals.message) { %>
+        <div class="container" style="width: 425px; padding: 10px;">
+            <div class="alert alert-<%- locals.error ? 'danger' : 'success' %>" role="alert" style="text-align: center;">
+                <%= message %>
+            </div>
+        </div>
+    <% } %>
+    <div class="main">
+        <p class="sign" align="center">Create Account</p>
+        <form action="/register" method ="POST">
+            <input class="un " type="text" align="center" name="email" placeholder="Username">
+            <input class="pass" type="password" align="center" name="password" placeholder="Password">
+            <button type="submit" class="submit" align="center">Register</button>
+        </form>        
     </div>
-     
 </body>
-
 </html>
 
 <%- include ('../partials/footer') %>
