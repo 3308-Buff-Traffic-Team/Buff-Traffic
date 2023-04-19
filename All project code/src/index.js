@@ -108,6 +108,8 @@ app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
   if (req.body.password.length < 6){
+    return res.json({status: 'Error', message: 'Password too short'});
+    res.status(400).redirect('/register');
     // res.json({status: "Error", message: 'Password too short'});
     res.status(400).render('pages/register', {error: true, message:"Password must be 6 characters or longer"});
     // return res.status(400).redirect('/register');
@@ -141,18 +143,23 @@ app.post('/login', (req, res) => {
           res.json({status: 403, message: 'Incorrect user or password'});
           // return res.status(403).redirect('/register');
           res.render('pages/login', {message: "Incorrect username or password"});
+          // res.json({status: 403, message: 'Incorrect user or password'}) // Noam
+          //return res.status(403).json(); // Noam
         }
       } else {
         // alert("Invalid credentials");
         res.status(400).render('pages/login', {error: true, message: "Incorrect username or password"});
         // return res.status(404).redirect('/register');
+        //return res.status(403).json(); // Noam 
       }
     })
     .catch((err) => {
       console.log(err);
       return res.redirect('/login');
+      //return res.status(403).redirect('/login');
     });
 });
+
 
 
 module.exports = app.listen(3000);
