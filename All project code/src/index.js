@@ -137,7 +137,7 @@ app.post('/login', (req, res) => {
           req.session.save();
           return res.status(200).redirect('/home');
         } else {
-          res.json({status: 403, message: 'Incorrect user or password'});
+          // res.json({status: 403, message: 'Incorrect user or password'});
           return res.status(403).redirect('/register');
         }
       } else {
