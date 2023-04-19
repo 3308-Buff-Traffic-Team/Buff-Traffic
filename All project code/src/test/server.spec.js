@@ -48,22 +48,33 @@ describe('Server!', () => {
          done();
        });
   });
+  it('negative : /register', done => {
+    chai
+       .request(server)
+       .post('/register')
+       .send({email: 'nme', password: 'pass'})
+       .end((err, res) => {
+         //expect(res).to.have.status(400);
+         expect(res.body.message).to.equals('Password too short');
+         done();
+       });
+  });
 
   //We are checking POST /add_user API by passing the user info in in incorrect manner (name cannot be an integer). This test case should pass and return a status 200 along with a "Invalid input" message.
 });
 
 describe('Login API', ()=> {
-  // it('Negative : /login. Checking invalid name', done => {
-  //   chai
-  //       .request(server)
-  //       .post('/login')
-  //       .send({email: "email@abc.com", password: 'no'})
-  //       .end((err, res) => {
-  //       expect(res).to.have.status(403);
-  //       expect(res.body.message).to.equals('Incorrect user or password');
-  //       done();
-  //       });
-  //   });
+   it('Negative : /login. Checking invalid name', done => {
+     chai
+         .request(server)
+         .post('/login')
+         .send({email: "email@abc1.com", password: 'no1'})
+         .end((err, res) => {
+            //expect(res).to.have.status(404);
+            expect(res.body.message).to.equals('User not found');
+            done();
+         });
+     });
   //
     it('Positive : /login. Checking successful login', done => {
       const user = {

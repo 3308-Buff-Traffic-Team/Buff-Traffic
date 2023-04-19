@@ -108,7 +108,7 @@ app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
   if (req.body.password.length < 6){
-    res.json({status: 'Error', message: 'Password too short'});
+    return res.json({status: 'Error', message: 'Password too short'});
     res.status(400).redirect('/register');
   }
   db.any(query, [req.body.email, hash])
@@ -136,12 +136,15 @@ app.post('/login', (req, res) => {
           req.session.user = user;
           req.session.save();
           return res.status(200).redirect('/home');
-        } else {
-          res.json({status: 403, message: 'Incorrect user or password'});
+        } 
+        else {
+          res.json({status: 'Falied', message: 'Incorrect user or password'});
           return res.status(403).redirect('/register');
         }
-      } else {
+      } 
+      else {
         // alert("Invalid credentials");
+        return res.json({status: 'Falied', message: 'User not found'});
         return res.status(404).redirect('/register');
       }
     })
