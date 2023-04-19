@@ -33,7 +33,16 @@
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <!-- <li><a href="/logout">Logout</a></li>
+            <li><a href="/login">Login</a></li> -->
+        
+            <% if(loggedIn != ''){ %>
+                <li><a href="/logout">Logout</a></li>
+              <% } else{ %>  
+                <li><a href="/login">Login</a></li>
+             <% } %>
+
+
           </ul>
         </div>
       </nav>
