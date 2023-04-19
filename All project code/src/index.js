@@ -75,8 +75,8 @@ app.get("/logout", (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home', {loggedIn: req.session.user});
-  
+  res.render('pages/home');
+
 });
 
 app.get('/login', (req, res) => {
@@ -123,14 +123,13 @@ app.post('/login', (req, res) => {
         } else {
           res.json({status: 403, message: 'Incorrect user or password'});
           // return res.status(403).redirect('/register');
-          console.log('inside login failed function');
-          res.render('pages/login', {message: "Incorrect username or password", loggedIn: undefined });
+          res.render('pages/login', {message: "Incorrect username or password"});
           // res.json({status: 403, message: 'Incorrect user or password'}) // Noam
           //return res.status(403).json(); // Noam
         }
       } else {
         // alert("Invalid credentials");
-        res.status(400).render('pages/login', {error: true, message: "Incorrect username or password", loggedIn: undefined});
+        res.status(403).render('pages/login', {error: true, message: "Incorrect username or password"});
         // return res.status(404).redirect('/register');
         //return res.status(403).json(); // Noam 
       }
