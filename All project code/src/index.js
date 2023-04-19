@@ -148,7 +148,7 @@ app.post('/login', (req, res) => {
         }
       } else {
         // alert("Invalid credentials");
-        res.status(400).render('pages/login', {error: true, message: "Incorrect username or password"});
+        res.status(403).render('pages/login', {error: true, message: "Incorrect username or password"});
         // return res.status(404).redirect('/register');
         //return res.status(403).json(); // Noam 
       }
@@ -156,7 +156,7 @@ app.post('/login', (req, res) => {
     .catch((err) => {
       console.log(err);
       return res.redirect('/login');
-      //return res.status(403).redirect('/login');
+      //return res.status(403).redirect('/login'); // Noam
     });
 });
 
