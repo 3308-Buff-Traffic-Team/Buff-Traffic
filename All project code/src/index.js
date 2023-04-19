@@ -109,7 +109,8 @@ app.post('/register',  async (req, res) => {
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
   if (req.body.password.length < 6){
     // res.json({status: "Error", message: 'Password too short'});
-    return res.status(400).redirect('/register');
+    res.status(400).render('pages/register', {error: true, message:"Password must be 6 characters or longer"});
+    // return res.status(400).redirect('/register');
   }
   db.any(query, [req.body.email, hash])
     .then(function(data){
@@ -138,11 +139,13 @@ app.post('/login', (req, res) => {
           return res.status(200).redirect('/home');
         } else {
           res.json({status: 403, message: 'Incorrect user or password'});
-          return res.status(403).redirect('/register');
+          // return res.status(403).redirect('/register');
+          res.render('pages/login', {message: "Incorrect username or password"});
         }
       } else {
         // alert("Invalid credentials");
-        return res.status(404).redirect('/register');
+        res.status(400).render('pages/login', {error: true, message: "Incorrect username or password"});
+        // return res.status(404).redirect('/register');
       }
     })
     .catch((err) => {
