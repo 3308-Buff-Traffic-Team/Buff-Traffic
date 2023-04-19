@@ -64,17 +64,6 @@ describe('Server!', () => {
 });
 
 describe('Login API', ()=> {
-   it('Negative : /login. Checking invalid name', done => {
-     chai
-         .request(server)
-         .post('/login')
-         .send({email: "email@abc1.com", password: 'no1'})
-         .end((err, res) => {
-            //expect(res).to.have.status(404);
-            expect(res.body.message).to.equals('User not found');
-            done();
-         });
-     });
   //
     it('Positive : /login. Checking successful login', done => {
       const user = {
@@ -89,6 +78,19 @@ describe('Login API', ()=> {
           expect(res).to.have.status(200);
           // expect(res).to.redirectTo('/home');
           done();
+          });
+      });
+
+      it('Negative: /login. Checking invalid credentials', (done) => {
+        chai.request(server)
+          .post('/login')
+          .send({email: "DNE", password: '' })
+          .end((err, res) => {
+            expect(res).to.have.status(403);
+            done();
+            //expect(res).to.have.redirect('/register');
+            //expect(res.body).to.have.property('message', 'Incorrect user or password');
+            
           });
       });
 

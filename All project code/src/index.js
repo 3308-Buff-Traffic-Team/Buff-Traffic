@@ -140,23 +140,22 @@ app.post('/login', (req, res) => {
           return res.status(200).redirect('/home');
         } 
         else {
-          res.json({status: 'Falied', message: 'Incorrect user or password'});
-        } else {
           // res.json({status: 403, message: 'Incorrect user or password'});
-          return res.status(403).redirect('/register');
-        }
-      } 
-      else {
-        // alert("Invalid credentials");
-        return res.json({status: 'Falied', message: 'User not found'});
-        return res.status(404).redirect('/register');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.redirect('/login');
-    });
-});
+           return res.status(403).json();
+         }
+       } else {
+         // alert("Invalid credentials");
+         console.log("here");
+         //res.json({status: 403, message: 'Incorrect user or password'});
+         return res.status(403).json();
+         // .redirect('/register');
+       }
+     })
+     .catch((err) => {
+       console.log(err);
+       return res.status(403).redirect('/login');
+     });
+ });
 
 
 module.exports = app.listen(3000);
