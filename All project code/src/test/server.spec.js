@@ -66,13 +66,17 @@ describe('Login API', ()=> {
   //   });
   //
     it('Positive : /login. Checking successful login', done => {
+      const user = {
+        email: 'test1@test.com',
+        password: 'SkoBuffs1'
+      };
       chai
           .request(server)
           .post('/login')
-          .send({email: "test1@test.com", password: 'SkoBuffs1'})
+          .send(user)
           .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res).to.have.redirect('/home');
+          expect(res).to.redirectTo('/home');
           done();
           });
       });
