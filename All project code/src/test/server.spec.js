@@ -86,9 +86,9 @@ describe('Login API', ()=> {
           .post('/login')
           .send(user)
           .end((err, res) => {
-            expect(res).to.have.status(200);
-            //expect(res).to.redirectTo('/home');
-            done();
+          expect(res).to.have.status(200);
+          // expect(res).to.redirectTo('/home');
+          done();
           });
       });
 

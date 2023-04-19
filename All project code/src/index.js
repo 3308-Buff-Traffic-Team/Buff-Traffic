@@ -110,6 +110,8 @@ app.post('/register',  async (req, res) => {
   if (req.body.password.length < 6){
     return res.json({status: 'Error', message: 'Password too short'});
     res.status(400).redirect('/register');
+    // res.json({status: "Error", message: 'Password too short'});
+    return res.status(400).redirect('/register');
   }
   db.any(query, [req.body.email, hash])
     .then(function(data){
@@ -139,6 +141,8 @@ app.post('/login', (req, res) => {
         } 
         else {
           res.json({status: 'Falied', message: 'Incorrect user or password'});
+        } else {
+          // res.json({status: 403, message: 'Incorrect user or password'});
           return res.status(403).redirect('/register');
         }
       } 
