@@ -119,8 +119,8 @@ app.post('/register',  async (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const query = `select email, password, user_id from users where email = $1;`;
-  
+  const query = `select * from users where users.email = $1;`;
+
   db.any(query, [req.body.email])
     .then(async (data) => {
       if (data[0]){
