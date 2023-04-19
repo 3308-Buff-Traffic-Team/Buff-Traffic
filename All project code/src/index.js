@@ -107,6 +107,10 @@ app.get('/profile', (req, res) => {
 app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   const query = 'INSERT INTO users (email, password) VALUES ($1, $2);'
+  if (req.body.password.length < 6){
+    res.json({status: 'Error', message: 'Password too short'});
+    res.status(400).redirect('/register');
+  }
   db.any(query, [req.body.email, hash])
     .then(function(data){
       res.json({status: 'Success', message: 'Success'});
