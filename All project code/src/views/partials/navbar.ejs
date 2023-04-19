@@ -1,33 +1,35 @@
 <header>
     <style>
-        #navbar{
+        .navbar{
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
-            background-color: #242323;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #3c3b3b;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
         }
-        #nav-links ul {
+        .nav-links ul {
             list-style: none;
             display: flex;
         }
-        #nav-links li {
+        .nav-links li {
             margin-left: 1rem;
         }
-        #nav-links a {
+        .nav-links a {
             text-decoration: none;
-            color: #ffd500;
+            color: #ffe600;
             font-weight: bold;
             padding: 0.5rem;
             border-radius: 5px;
         }
+
     </style>
-    <nav id="navbar">
+    <nav class="navbar">
         <div class="logo">
             <img src="../../resources/img/BT-Icon-v2.png" style="width: 50px" alt="Logo">
+            <!-- <p>Buff Traffic</p> -->
         </div>
-        <div id="nav-links">
+        <div class="nav-links">
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="#">Profile</a></li>
