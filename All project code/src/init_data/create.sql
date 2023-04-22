@@ -6,11 +6,12 @@ CREATE TABLE users(
     name CHAR(60) NULL
 );
 
+--time is inserted in hh:mm:ss format
 CREATE TABLE IF NOT EXISTS traffic (
   roomid INT(3) PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   weekday SMALLINT(1) NOT NULL,
-  open TIME NULL, --time is inserted in hh:mm:ss format
+  open TIME NULL,
   close TIME NULL,
   hr6 INT NULL,
   hr7 INT NULL,
