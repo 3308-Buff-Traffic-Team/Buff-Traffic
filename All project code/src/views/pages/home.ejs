@@ -5,7 +5,7 @@
                 .card {
                     position: relative;
                     bottom: -100%;
-                    animation: slide-up 0.5s ease-out forwards;
+                    animation: slide-up 0.75s ease-out forwards;
                 }
 
                 @keyframes slide-up {
@@ -14,18 +14,16 @@
                     }
                 }
 
-                .card:nth-child(1) {
-                    animation-delay: 0s;
+                .star-icon {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 10px;
                 }
 
-                .card:nth-child(2) {
-                    animation-delay: 0.25s;
+                .star-icon i {
+                    color: gold;
                 }
-
-                .card:nth-child(3) {
-                    animation-delay: 0.5s;
-                }
-
             </style>
             <link rel="stylesheet" href="../resources/css/style.css">
 
@@ -38,9 +36,8 @@
 
         <body>
             <section class="jumbotron text-center">
-                <div class="container">
+                <div style="padding-bottom: 50px; padding-top: 20px;" class="container">
                     <h1 class="jumbotron-heading-center">Welcome to BuffTraffic!</h1>
-                    <p class="lead">Favorites</p>
                 </div>
             </section>
             <div class="container">
@@ -50,6 +47,9 @@
                             <div class="card">
                                 <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top"
                                     alt="Weight Room">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Weight Room</h5>
                                     <p class="card-text">The weight room at the rec center is my favorite place to get a
@@ -61,6 +61,9 @@
                             <div class="card">
                                 <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
                                     alt="Stretching/Ab Area">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Rock Wall</h5>
                                     <p class="card-text">CU's rock climbing wall is a fun way to improve strength
@@ -71,6 +74,9 @@
                         <div class="col-sm-4">
                             <div class="card">
                                 <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Yoga Room">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Buffalo Pool</h5>
                                     <p class="card-text">The Buff Pool is a perfect way to end a workout and get some
