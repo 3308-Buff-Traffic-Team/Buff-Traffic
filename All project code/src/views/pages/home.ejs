@@ -1,5 +1,42 @@
 <%- include ('../partials/header') %> <%- include ('../partials/navbar') %>
-        <main>
+
+        <head>
+            <style>
+                .card {
+                    position: relative;
+                    bottom: -100%;
+                    animation: slide-up 0.5s ease-out forwards;
+                }
+
+                @keyframes slide-up {
+                    to {
+                        bottom: 0;
+                    }
+                }
+
+                .card:nth-child(1) {
+                    animation-delay: 0s;
+                }
+
+                .card:nth-child(2) {
+                    animation-delay: 0.25s;
+                }
+
+                .card:nth-child(3) {
+                    animation-delay: 0.5s;
+                }
+
+            </style>
+            <link rel="stylesheet" href="../resources/css/style.css">
+
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+            <title>Home</title>
+        </head>
+
+        <body>
             <section class="jumbotron text-center">
                 <div class="container">
                     <h1 class="jumbotron-heading-center">Welcome to BuffTraffic!</h1>
@@ -11,7 +48,8 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="card">
-                                <img height=600 src="/img/main_weight_room.png" class="card-img-top" alt="Weight Room">
+                                <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top"
+                                    alt="Weight Room">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Weight Room</h5>
                                     <p class="card-text">The weight room at the rec center is my favorite place to get a
@@ -21,26 +59,30 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/400x600" class="card-img-top" alt="Stretching/Ab Area">
+                                <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
+                                    alt="Stretching/Ab Area">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title">Stretching/Ab Area</h5>
-                                    <p class="card-text">The yoga room at the rec center is my favorite place to workout my abs 
-                                        and stretch</p>
+                                    <h5 class="card-title">Rock Wall</h5>
+                                    <p class="card-text">CU's rock climbing wall is a fun way to improve strength
+                                        both physically and mentally!</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/400x600" class="card-img-top" alt="Yoga Room">
+                                <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Yoga Room">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Buffalo Pool</h5>
-                                    <p class="card-text">The Buff Pool is a perfect way to end a workout and get some extra
-                                    cardio in</p>
+                                    <p class="card-text">The Buff Pool is a perfect way to end a workout and get some
+                                        extra
+                                        cardio in</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </body>
 
-            <%- include ('../partials/footer') %>
+
+        <%- include ('../partials/footer') %>
