@@ -1,9 +1,117 @@
 <%- include ('../partials/header') %> <%- include ('../partials/navbar') %>
-        <main>
+
+        <head>
+            <style>
+                .card {
+                    position: relative;
+                    bottom: -100%;
+                    animation: slide-up 0.75s ease-out forwards;
+                }
+
+                .circle-wrap {
+                    position: relative;
+                    bottom: -100%;
+                    animation: slide-up 1s ease-out forwards;
+                }
+
+                @keyframes slide-up {
+                    to {
+                        bottom: 0;
+                    }
+                }
+
+                .star-icon {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 10px;
+                }
+
+                .star-icon i {
+                    color: gold;
+                }
+
+                .circle-wrap {
+                    margin: 20px auto;
+                    width: 10vh;
+                    height: 10vh;
+                    background: #fefcff;
+                    border-radius: 50%;
+                    border: 1px solid #cdcbd0;
+                }
+
+                .circle-wrap .circle .mask,
+                .circle-wrap .circle .fill {
+                    width: 10vh;
+                    height: 10vh;
+                    position: absolute;
+                    border-radius: 50%;
+                }
+
+                .circle-wrap .circle .mask {
+                    clip: rect(0px, 10vh, 10vh, 5vh);
+                }
+
+                .inside-circle {
+                    /* other styles */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .circle-wrap .inside-circle {
+                    width: 8vh;
+                    height: 8vh;
+                    border-radius: 50%;
+                    background: #d2eaf1;
+                    line-height: 120px;
+                    text-align: center;
+                    margin-top: 8.5px;
+                    margin-left: 8.5px;
+                    color: #1e51dc;
+                    position: absolute;
+                    z-index: 100;
+                    font-weight: 700;
+                    font-size: 1em;
+                }
+
+                /* color animation */
+
+                /* 3rd progress bar */
+                .mask .fill {
+                    clip: rect(0px, 5vh, 10vh, 0px);
+                    background-color: #227ded;
+                }
+
+                .mask.full,
+                .circle .fill {
+                    animation: fill ease-in-out 3s;
+                    transform: rotate(135deg);
+                }
+
+                @keyframes fill {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(135deg);
+                    }
+                }
+            </style>
+            <link rel="stylesheet" href="../resources/css/style.css">
+
+            <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+            <title>Home</title>
+        </head>
+
+        <body>
             <section class="jumbotron text-center">
-                <div class="container">
+                <div style="padding-bottom: 50px; padding-top: 20px;" class="container">
                     <h1 class="jumbotron-heading-center">Welcome to BuffTraffic!</h1>
-                    <p class="lead">Favorites</p>
                 </div>
             </section>
             <div class="container">
@@ -11,36 +119,83 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="card">
-                                <img height=600 src="/img/main_weight_room.png" class="card-img-top" alt="Weight Room">
+                                <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top"
+                                    alt="Weight Room">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Weight Room</h5>
                                     <p class="card-text">The weight room at the rec center is my favorite place to get a
                                         good workout</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img src="https://via.placeholder.com/400x600" class="card-img-top" alt="Stretching/Ab Area">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Stretching/Ab Area</h5>
-                                    <p class="card-text">The yoga room at the rec center is my favorite place to workout my abs 
-                                        and stretch</p>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/400x600" class="card-img-top" alt="Yoga Room">
+                                <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
+                                    alt="Stretching/Ab Area">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Rock Wall</h5>
+                                    <p class="card-text">CU's rock climbing wall is a fun way to improve strength
+                                        both physically and mentally!</p>
+                                </div>
+                            </div>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Yoga Room">
+                                <div class="star-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Buffalo Pool</h5>
-                                    <p class="card-text">The Buff Pool is a perfect way to end a workout and get some extra
-                                    cardio in</p>
+                                    <p class="card-text">The Buff Pool is a perfect way to end a workout and get some
+                                        extra
+                                        cardio in</p>
+                                </div>
+                            </div>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </body>
 
-            <%- include ('../partials/footer') %>
+
+        <%- include ('../partials/footer') %>
