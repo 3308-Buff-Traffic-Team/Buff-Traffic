@@ -8,6 +8,12 @@
                     animation: slide-up 0.75s ease-out forwards;
                 }
 
+                .circle-wrap {
+                    position: relative;
+                    bottom: -100%;
+                    animation: slide-up 1s ease-out forwards;
+                }
+
                 @keyframes slide-up {
                     to {
                         bottom: 0;
@@ -23,6 +29,74 @@
 
                 .star-icon i {
                     color: gold;
+                }
+
+                .circle-wrap {
+                    margin: 20px auto;
+                    width: 10vh;
+                    height: 10vh;
+                    background: #fefcff;
+                    border-radius: 50%;
+                    border: 1px solid #cdcbd0;
+                }
+
+                .circle-wrap .circle .mask,
+                .circle-wrap .circle .fill {
+                    width: 10vh;
+                    height: 10vh;
+                    position: absolute;
+                    border-radius: 50%;
+                }
+
+                .circle-wrap .circle .mask {
+                    clip: rect(0px, 10vh, 10vh, 5vh);
+                }
+
+                .inside-circle {
+                    /* other styles */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .circle-wrap .inside-circle {
+                    width: 8vh;
+                    height: 8vh;
+                    border-radius: 50%;
+                    background: #d2eaf1;
+                    line-height: 120px;
+                    text-align: center;
+                    margin-top: 8.5px;
+                    margin-left: 8.5px;
+                    color: #1e51dc;
+                    position: absolute;
+                    z-index: 100;
+                    font-weight: 700;
+                    font-size: 1em;
+                }
+
+                /* color animation */
+
+                /* 3rd progress bar */
+                .mask .fill {
+                    clip: rect(0px, 5vh, 10vh, 0px);
+                    background-color: #227ded;
+                }
+
+                .mask.full,
+                .circle .fill {
+                    animation: fill ease-in-out 3s;
+                    transform: rotate(135deg);
+                }
+
+                @keyframes fill {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    100% {
+                        transform: rotate(135deg);
+                    }
                 }
             </style>
             <link rel="stylesheet" href="../resources/css/style.css">
@@ -56,6 +130,17 @@
                                         good workout</p>
                                 </div>
                             </div>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="card">
@@ -70,6 +155,17 @@
                                         both physically and mentally!</p>
                                 </div>
                             </div>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="card">
@@ -82,6 +178,17 @@
                                     <p class="card-text">The Buff Pool is a perfect way to end a workout and get some
                                         extra
                                         cardio in</p>
+                                </div>
+                            </div>
+                            <div class="circle-wrap">
+                                <div class="circle">
+                                    <div class="mask full">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="mask half">
+                                        <div class="fill"></div>
+                                    </div>
+                                    <div class="inside-circle"> 75% </div>
                                 </div>
                             </div>
                         </div>
