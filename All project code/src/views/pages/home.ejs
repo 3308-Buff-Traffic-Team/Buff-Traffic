@@ -117,32 +117,36 @@
             <div class="container">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top"
-                                    alt="Weight Room">
-                                <div class="star-icon">
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Weight Room</h5>
-                                    <p class="card-text">The weight room at the rec center is my favorite place to get a
-                                        good workout</p>
-                                </div>
-                            </div>
-                            <div class="circle-wrap">
-                                <div class="circle">
-                                    <div class="mask full">
-                                        <div class="fill"></div>
+                        <% if (rooms){ %>
+                            <% rooms.forEach(function room(){ %>
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top"
+                                            alt="Weight Room">
+                                        <div class="star-icon">
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Weight Room</h5>
+                                            <p class="card-text">The weight room at the rec center is my favorite place to get a
+                                                good workout</p>
+                                        </div>
                                     </div>
-                                    <div class="mask half">
-                                        <div class="fill"></div>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                            <div class="mask full">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="mask half">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="inside-circle"> 75% </div>
+                                        </div>
                                     </div>
-                                    <div class="inside-circle"> 75% </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
+                            <% }); %>
+                        <% } %>
+                        <!-- <div class="col-sm-4">
                             <div class="card">
                                 <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
                                     alt="Stretching/Ab Area">
@@ -166,8 +170,8 @@
                                     <div class="inside-circle"> 75% </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
+                        </div> -->
+                        <!-- <div class="col-sm-4">
                             <div class="card">
                                 <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Yoga Room">
                                 <div class="star-icon">
@@ -191,7 +195,7 @@
                                     <div class="inside-circle"> 75% </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

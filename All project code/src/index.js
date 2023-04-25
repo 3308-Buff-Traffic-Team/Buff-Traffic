@@ -75,7 +75,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home', {loggedIn: req.session.user});
+  res.render('pages/home', {loggedIn: req.session.user, rooms: []});
   
 });
 
