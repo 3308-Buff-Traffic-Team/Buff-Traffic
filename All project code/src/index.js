@@ -100,7 +100,7 @@ app.post('/register',  async (req, res) => {
   db.any(query, [req.body.email, hash, req.body.firstname, req.body.lastname])
     .then(function(data){
      // res.json({status: 'Success', message: 'Success'});
-      res.redirect(200,'/login');
+     return res.status(200).redirect('/login');
     })
     .catch(err => {
       // alert(err);
