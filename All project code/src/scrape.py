@@ -13,4 +13,4 @@ soup = BeautifulSoup(page.content, "html.parser")
 print(soup.prettify())
 print(soup.title)
 for di in soup.find_all("div", {"style": "text-align:center;"}):
-    print(di)
+    print(di.get_text(separator="|"))
