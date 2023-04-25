@@ -91,10 +91,10 @@ app.post('/register',  async (req, res) => {
   const hash = await bcrypt.hash(req.body.password, 10);
   const query = 'INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4);'
   if (req.body.password.length < 6){
-    return res.json({status: 'Error', message: 'Password too short'});
-    res.status(400).redirect('/register');
+    //return res.json({status: 'Error', message: 'Password too short'});
+   // res.status(400).redirect('/register');
     // res.json({status: "Error", message: 'Password too short'});
-    res.status(400).render('pages/register', {error: true, message:"Password must be 6 characters or longer"});
+    res.status(400).render('pages/register', {error: true, message:"Password must be 6 characters or longer", loggedIn: undefined });
     // return res.status(400).redirect('/register');
   }
   db.any(query, [req.body.email, hash, req.body.firstname, req.body.lastname])
