@@ -32,8 +32,14 @@
         <div class="nav-links">
           <ul>
             <li><a href="/home">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <% if(loggedIn == undefined){ %>
+                <li><a href="/login">Login</a></li>
+                <% } else{ %> 
+                    <li><a href="/profile">Profile</a></li> 
+                    <li><a href="/logout">Logout</a></li>
+             <% } %>
+
+
           </ul>
         </div>
       </nav>
