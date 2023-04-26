@@ -57,7 +57,8 @@ app.use(
 
 app.get("/", (req, res) => {
   //res.render("pages/home");
-  res.render("pages/home", {loggedIn: req.session.user});
+  // res.render("pages/home", {loggedIn: req.session.user});
+  res.redirect('/home');
 });
 
 app.get("/test", (req, res) => {
