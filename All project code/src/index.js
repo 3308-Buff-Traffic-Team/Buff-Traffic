@@ -76,7 +76,19 @@ app.get("/logout", (req, res) => {
 
 app.get('/home', (req, res) => {
   const query = "select * from traffic;";
-  db.any(query)
+  const now = new Date();
+  const options = { timeZone: 'America/Denver', hour12: false, hour: '2-digit' };
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const mtDayOfWeek = now.getDay() + 1; //i dont think this is mountain? fk it we ball tho
+  const mtHour = formatter.format(now);
+  console.log('Day of week:', mtDayOfWeek);
+  console.log('current hour: ', mtHour);
+
+  const query2 = `SELECT AVG(hr${mtHour}) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
+  const query3 = `SELECT * FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek} LIMIT 5`
+
+
+  db.any(query3)
     .then(function(data){
       if (data){
         res.render('pages/home', {loggedIn: req.session.user, rooms: data});
@@ -87,7 +99,7 @@ app.get('/home', (req, res) => {
     .catch( err => {
       console.log(err);
     });
-  
+
 });
 
 app.get('/login', (req, res) => {
@@ -143,7 +155,7 @@ app.post('/login', (req, res) => {
         // alert("Invalid credentials");
         res.status(403).render('pages/login', {error: true, message: "Incorrect username or password", loggedIn: undefined});
         // return res.status(404).redirect('/register');
-        //return res.status(403).json(); // Noam 
+        //return res.status(403).json(); // Noam
       }
     })
     .catch((err) => {
