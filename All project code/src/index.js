@@ -75,7 +75,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  const query = "select * from total_traffic;";
+  const query = "select * from traffic;";
   db.any(query)
     .then(function(data){
       if (data){
