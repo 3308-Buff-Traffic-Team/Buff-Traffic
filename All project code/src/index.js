@@ -81,7 +81,7 @@ app.get('/home', (req, res) => {
       if (data){
         res.render('pages/home', {loggedIn: req.session.user, rooms: data});
       } else {
-        res.render('pages/home', {loggedIn: req.session.user, rooms: data, error: true, message: "Could not load rooms"});
+        res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});
       }
     })
     .catch( err => {
