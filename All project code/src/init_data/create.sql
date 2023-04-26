@@ -36,9 +36,9 @@ CREATE TABLE total_traffic(
 
 --time is inserted in hh:mm:ss format
 CREATE TABLE IF NOT EXISTS traffic (
-  roomid INT(3) PRIMARY KEY,
+  roomid INT PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
-  weekday SMALLINT(1) NOT NULL,
+  weekday SMALLINT NOT NULL,
   open TIME NULL,
   close TIME NULL,
   image NOT NULL,

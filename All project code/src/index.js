@@ -81,7 +81,7 @@ app.get('/home', (req, res) => {
       if (data){
         res.render('pages/home', {loggedIn: req.session.user, rooms: data});
       } else {
-        res.render('pages/home', {loggedIn: req.session.user, rooms: data, error: true, message: "Could not load rooms"});
+        res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});
       }
     })
     .catch( err => {
@@ -142,7 +142,6 @@ app.post('/login', (req, res) => {
       } else {
         // alert("Invalid credentials");
         res.status(403).render('pages/login', {error: true, message: "Incorrect username or password", loggedIn: undefined});
-
         // return res.status(404).redirect('/register');
         //return res.status(403).json(); // Noam 
       }
