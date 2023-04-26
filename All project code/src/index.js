@@ -74,7 +74,18 @@ app.get("/logout", (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home', {loggedIn: req.session.user});
+  const query = "select * from total_traffic;";
+  db.any(query)
+    .then(function(data){
+      if (data){
+        res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+      } else {
+        res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});
+      }
+    })
+    .catch( err => {
+      console.log(err);
+    });
   
 });
 
@@ -130,7 +141,6 @@ app.post('/login', (req, res) => {
       } else {
         // alert("Invalid credentials");
         res.status(403).render('pages/login', {error: true, message: "Incorrect username or password", loggedIn: undefined});
-
         // return res.status(404).redirect('/register');
         //return res.status(403).json(); // Noam 
       }
