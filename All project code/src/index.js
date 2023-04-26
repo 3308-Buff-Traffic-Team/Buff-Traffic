@@ -57,8 +57,7 @@ app.use(
 
 app.get("/", (req, res) => {
   //res.render("pages/home");
-  res.render("pages/test", {user: req.session.user.user_id });
-  console.log(user.user_id);
+  res.render("pages/home", {loggedIn: req.session.user});
 });
 
 app.get("/test", (req, res) => {
