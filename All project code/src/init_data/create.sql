@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS traffic (
   weekday SMALLINT NOT NULL,
   open TIME NULL,
   close TIME NULL,
-  image NOT NULL,
   hr6 INT NULL,
   hr7 INT NULL,
   hr8 INT NULL,
