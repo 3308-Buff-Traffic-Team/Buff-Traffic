@@ -85,12 +85,14 @@ app.get('/home', (req, res) => {
   console.log('current hour: ', mtHour);
 
   const query2 = `SELECT AVG(hr${mtHour}) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
-  const query3 = `SELECT * FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek} LIMIT 5`
+  //i just need name, hr, that's it?
+  const query3 = `SELECT name, AVG(hr${mtHour}) AS avg_traffic FROM traffic_day WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym') AND weekda = ${mtDayOfWeek} GROUP BY name LIMIT 20`
 
 
   db.any(query3)
     .then(function(data){
       if (data){
+        console.log(data);
         res.render('pages/home', {loggedIn: req.session.user, rooms: data});
       } else {
         res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});

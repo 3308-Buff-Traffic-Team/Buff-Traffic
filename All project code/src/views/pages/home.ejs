@@ -151,6 +151,30 @@
                                         </div>
                                     </div>
                                 </div>
+                              <% } else if (room.name == "Competition Pool") { %>
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
+                                        <div class="star-icon">
+                                            <i class="fa-solid fa-star"></i>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Competition Pool</h5>
+                                            <p class="card-text">Get ur swim in homie</p>
+                                        </div>
+                                    </div>
+                                    <div class="circle-wrap">
+                                        <div class="circle">
+                                            <div class="mask full">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="mask half">
+                                                <div class="fill"></div>
+                                            </div>
+                                            <div class="inside-circle"> 75% </div>
+                                        </div>
+                                    </div>
+                                </div>
                               <% } else { %>
                                 <div class="col-sm-4">
                                     <div class="card">
@@ -159,9 +183,8 @@
                                             <i class="fa-solid fa-star"></i>
                                         </div>
                                         <div class="card-body text-center">
-                                            <h5 class="card-title">Weight Room</h5>
-                                            <p class="card-text">The weight room at the rec center is my favorite place to get a
-                                                good workout</p>
+                                            <h5 class="card-title"><%= room.name %></h5>
+                                            <p class="card-text">Filler text xd</p>
                                         </div>
                                     </div>
                                     <div class="circle-wrap">
