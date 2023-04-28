@@ -1,1 +1,1 @@
--- INSERT INTO traffic (roomid, name, weekday, open, close, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24) VALUES (011);
+-- INSERT INTO traffic (roomid, name, weekda, open, close, hr06, hr07, hr08, hr09, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24) VALUES (011, 'Rec Center Main Weight Room', );

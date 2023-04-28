@@ -36,17 +36,17 @@ CREATE TABLE total_traffic(
 
 --time is inserted in hh:mm:ss format
 
-
+DROP TABLE IF EXISTS traffic CASCADE;
 CREATE TABLE IF NOT EXISTS traffic (
   roomid INT PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   weekda SMALLINT NOT NULL,
   open TIME NULL,
   close TIME NULL,
-  hr6 INT NULL,
-  hr7 INT NULL,
-  hr8 INT NULL,
-  hr9 INT NULL,
+  hr06 INT NULL,
+  hr07 INT NULL,
+  hr08 INT NULL,
+  hr09 INT NULL,
   hr10 INT NULL,
   hr11 INT NULL,
   hr12 INT NULL,
@@ -64,15 +64,16 @@ CREATE TABLE IF NOT EXISTS traffic (
   hr24 INT NULL
 );
 
+DROP TABLE IF EXISTS traffic_day CASCADE;
 CREATE TABLE IF NOT EXISTS traffic_day (
   roomid INT NOT NULL,
   datet DATE NOT NULL,
   name VARCHAR(50) NOT NULL,
   weekda SMALLINT NOT NULL,
-  hr6 INT NULL,
-  hr7 INT NULL,
-  hr8 INT NULL,
-  hr9 INT NULL,
+  hr06 INT NULL,
+  hr07 INT NULL,
+  hr08 INT NULL,
+  hr09 INT NULL,
   hr10 INT NULL,
   hr11 INT NULL,
   hr12 INT NULL,

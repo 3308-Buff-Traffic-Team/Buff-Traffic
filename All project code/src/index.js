@@ -87,18 +87,32 @@ app.get("/logout", (req, res) => {
 
 app.get('/home', (req, res) => {
   const query = "select * from traffic;";
-  db.any(query)
+  const now = new Date();
+  const options = { timeZone: 'America/Denver', hour12: false, hour: '2-digit' };
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const mtDayOfWeek = now.getDay() + 1; //i dont think this is mountain? fk it we ball tho
+  const mtHour = formatter.format(now);
+  console.log('Day of week:', mtDayOfWeek);
+  console.log('current hour: ', mtHour);
+
+  const query2 = `SELECT AVG(hr${mtHour}) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
+  //i just need name, hr, that's it?
+  const query3 = `SELECT name, AVG(hr${mtHour}) AS avg_traffic FROM traffic_day WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym') AND weekda = ${mtDayOfWeek} GROUP BY name LIMIT 20`
+
+
+  db.any(query3)
     .then(function(data){
       if (data){
-        res.render('pages/home', {loggedIn: req.session.user, rooms: data});
       } else {
+        console.log(data);
+        res.render('pages/home', {loggedIn: req.session.user, rooms: data});
         res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});
       }
     })
     .catch( err => {
       console.log(err);
     });
-  
+
 });
 
 app.get('/login', (req, res) => {
@@ -154,7 +168,7 @@ app.post('/login', (req, res) => {
         // alert("Invalid credentials");
         res.status(403).render('pages/login', {error: true, message: "Incorrect username or password", loggedIn: undefined});
         // return res.status(404).redirect('/register');
-        //return res.status(403).json(); // Noam 
+        //return res.status(403).json(); // Noam
       }
     })
     .catch((err) => {
