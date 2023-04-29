@@ -97,16 +97,18 @@ app.get('/home', (req, res) => {
 
   const query2 = `SELECT AVG(hr${mtHour}) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
   //i just need name, hr, that's it?
-  const query3 = `SELECT name, hr${mtHour} FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym') AND weekda = ${mtDayOfWeek} LIMIT 20;`;
+  const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
 
   console.log(query3);
   db.any(query3)
     .then(function(data){
       if (data){
-        
-      } else {
         console.log(data);
         res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+
+      } else {
+        // console.log(data);
+        // res.render('pages/home', {loggedIn: req.session.user, rooms: data});
         res.render('pages/home', {loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms"});
       }
     })
