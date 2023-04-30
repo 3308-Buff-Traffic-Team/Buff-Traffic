@@ -90,7 +90,7 @@ app.get('/home', (req, res) => {
   const now = new Date();
   const options = { timeZone: 'America/Denver', hour12: false, hour: '2-digit' };
   const formatter = new Intl.DateTimeFormat('en-US', options);
-  const mtDayOfWeek = now.getDay(); //i dont think this is mountain? fk it we ball tho
+  const mtDayOfWeek = now.getDay() + 1; //i dont think this is mountain? fk it we ball tho
   const mtHour = formatter.format(now);
   console.log('Day of week:', mtDayOfWeek);
   console.log('current hour: ', mtHour);
