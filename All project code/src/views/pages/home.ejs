@@ -83,11 +83,11 @@
                     background-color: #227ded;
                 }
 
-                .mask.full,
+                /* .mask.full,
                 .circle .fill {
                     animation: fill ease-in-out 3s;
-                    transform: rotate(135deg);
-                }
+                    transform: rotate(180deg);
+                } */
 
                 @keyframes fill {
                     0% {
@@ -109,6 +109,7 @@
         </head>
 
         <body style="padding-bottom: 7rem;">
+
             <% if (locals.message) { %>
                 <div class="container" style="width: 425px; padding: 10px;">
                     <div class="alert alert-<%- locals.error ? 'danger' : 'success' %>" role="alert" style="text-align: center;">
@@ -126,82 +127,13 @@
                     <div class="row">
                         <% if (rooms){ %>
                             <% rooms.forEach((room) => { %>
-                              <% if (room.name == 'Rec Center Main Weight Room') { %>
+                              <% if (room.name) { %>
                                 <div class="col-sm-4">
-                                    <div class="card">
-                                        <img src="../../resources/img/RecMainWeightRoom.jpg" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
-                                        <div class="star-icon">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Weight Room</h5>
-                                            <p class="card-text">The weight room at the rec center is my favorite place to get a
-                                                good workout</p>
-                                        </div>
-                                    </div>
-                                    <div class="circle-wrap">
-                                        <div class="circle">
-                                            <div class="mask full">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="mask half">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="inside-circle"> 75% </div>
-                                        </div>
-                                    </div>
+                                  <%= generateCard(room.name, room.avg_traffic); %>
                                 </div>
-                              <% } else if (room.name == "Competition Pool") { %>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
-                                        <div class="star-icon">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Competition Pool</h5>
-                                            <p class="card-text">Get ur swim in homie</p>
-                                        </div>
-                                    </div>
-                                    <div class="circle-wrap">
-                                        <div class="circle">
-                                            <div class="mask full">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="mask half">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="inside-circle"> 75% </div>
-                                        </div>
-                                    </div>
-                                </div>
-                              <% } else { %>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <img src="#" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
-                                        <div class="star-icon">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title"><%= room.name %></h5>
-                                            <p class="card-text">Filler text xd</p>
-                                        </div>
-                                    </div>
-                                    <div class="circle-wrap">
-                                        <div class="circle">
-                                            <div class="mask full">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="mask half">
-                                                <div class="fill"></div>
-                                            </div>
-                                            <div class="inside-circle"> 75% </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              <% }}); %>
                               <% } %>
-                            <% }); %>
-                        <% } %>
+
                         <!-- <div class="col-sm-4">
                             <div class="card">
                                 <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
@@ -252,10 +184,134 @@
                                 </div>
                             </div>
                         </div> -->
+
+
                     </div>
                 </div>
             </div>
-        </body>
+
+          </body>
+
+          <%  function generateCard(name, traffic) { %>
+            <% if (traffic == null) {traffic = 0} %>
+            <% let photo = getPhoto(name)%>
+            <% let traffic_ct = getCapacity(name, traffic)%>
+            <% let angle = (traffic_ct/100) * 360 %>
+
+
+            <div class="card">
+                <img src="<%= photo%>" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
+                <div class="star-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title"> <%= name %> </h5>
+                    <!-- <p class="card-text">The weight room at the rec center is my favorite place to get a
+                        good workout</p> -->
+                </div>
+            </div>
+            <div class="circle-wrap">
+                <div class="circle">
+                    <div class="mask full">
+                        <div class="fill" style="transform: rotate(<%= angle%>deg);"></div>
+                    </div>
+                    <div class="mask half">
+                        <div class="fill"></div>
+                    </div>
+                    <div class="inside-circle"> <%= traffic_ct %>% </div>
+                </div>
+            </div>
+
+          <%  } %>
+
+          <%  function getCapacity(name, traffic) {
+
+            switch (name) {
+              case ('Rec Center Main Weight Room'):
+                return ((traffic * 100)/130).toFixed(0);
+              case ('Competition Pool'):
+                return ((traffic * 100)/175).toFixed(0);
+              case ('Climbing Gym'):
+                return ((traffic * 100)/60).toFixed(0);
+              case ('Buffalo Pool'):
+                return ((traffic * 100)/80).toFixed(0);
+              case ('Level 1 Stretching/Ab Area'):
+                return ((traffic * 100)/35).toFixed(0);
+              case ('Squash & Racquetball Courts'):
+                return ((traffic * 100)/10).toFixed(0);
+              case ('Mat Room'):
+                return ((traffic * 100)/40).toFixed(0);
+              case ('Cycle Studio'):
+                return ((traffic * 100)/20).toFixed(0);
+              case ('Turf Gym'):
+                return ((traffic * 100)/80).toFixed(0);
+              case ('Pool Overlook Cardio'):
+                return ((traffic * 100)/50).toFixed(0);
+              case ('Mind Body Studio'):
+                return ((traffic * 100)/80).toFixed(0);
+              case ('Ice Rink'):
+                return ((traffic * 100)/80).toFixed(0);
+              case ('Will Vill - Main Weight Room'):
+                return ((traffic * 100)/60).toFixed(0);
+              case ('Dive Well'):
+                return ((traffic * 100)/50).toFixed(0);
+              case ('Upper Gym'):
+                return ((traffic * 100)/485).toFixed(0);
+              case ('Lower Gym'):
+                return ((traffic * 100)/485).toFixed(0);
+              case ('Tennis Court 1'):
+                return ((traffic * 100)/4).toFixed(0);
+              case ('Tennis Court 2'):
+                return ((traffic * 100)/4).toFixed(0);
+              case ('Tennis Court 3'):
+                return ((traffic * 100)/4).toFixed(0);
+              case ('Front Lobby Cardio Equipment'):
+                return ((traffic * 100)/20).toFixed(0);
+              default:
+                return traffic;
+            }
+
+            /* missing data for:
+            buffalo pool,
+            squash/racquetball courts,
+            cycle studio,
+            Turf Gym
+            mind body Studio
+            ice Rink
+            dive well (online it says capacity is 150...?)
+            upper gym (says its ~485? idk that sounds about right...)
+            ^ same with lower gym
+           'Ping Pong Lounge',
+            'Front Lobby Cardio Equipment' (online says its 5 but no way its that low)
+            'Studio 1',
+           'Studio 2',
+            'Studio 3',
+             'Studio 4W',
+            'Studio 4F',
+            '2nd Floor TRX Room',
+            '2nd Floor Cardio Balcony',
+            '2nd Floor Fitness Studio
+            */
+
+          } %>
+
+          <%  function getPhoto(name) {
+            //should probably add more photos here
+            switch (name) {
+              case ('Rec Center Main Weight Room'):
+                return "../../resources/img/RecMainWeightRoom.jpg";
+              case ('Competition Pool'):
+                return "../../resources/img/RecPool.jpg";
+              case ('Climbing Gym'):
+                return "../../resources/img/RecRockWall.jpg";
+              default:
+                return "../../resources/img/BT-Icon-v2.png";
+            }
+
+            } %>
+
+
+
 
 
         <%- include ('../partials/footer') %>
