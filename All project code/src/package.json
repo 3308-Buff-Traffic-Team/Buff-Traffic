@@ -11,8 +11,8 @@
         "express": "^4.6.1",
         "nodemon": "2.0.20",
         "pg-promise": "^10.11.1",
-        "express-session": "1.17.3"
-
+        "express-session": "1.17.3",
+        "node-schedule": "2.1.1"
     },
     "devDependencies": {
         "nodemon": "^2.0.7",
