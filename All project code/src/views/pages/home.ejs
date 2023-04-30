@@ -25,10 +25,12 @@
                     top: 0;
                     right: 0;
                     padding: 10px;
+                    cursor: pointer;
                 }
 
                 .star-icon i {
-                    color: gold;
+                    color: 'rgb(33, 37, 41)';
+                    text-shadow: 0 0 3px #ffffff;
                 }
 
                 .circle-wrap {
@@ -109,6 +111,19 @@
         </head>
 
         <body style="padding-bottom: 7rem;">
+            <script>
+                function toggleStar(name){
+                    const starIcon = document.getElementById(`${name}`);
+                    const cardStyle = getComputedStyle(starIcon);
+                    const currColor = cardStyle.getPropertyValue('color');
+                    if (currColor==='rgb(33, 37, 41)'){
+                        starIcon.style.color = 'rgb(255, 215, 0)';
+                    }
+                    else if (currColor==='rgb(255, 215, 0)'){
+                        starIcon.style.color = 'rgb(33, 37, 41)';
+                    }
+                }
+            </script>
 
             <% if (locals.message) { %>
                 <div class="container" style="width: 425px; padding: 10px;">
@@ -122,6 +137,11 @@
                     <h1 class="jumbotron-heading-center">Welcome to Buff Traffic!</h1>
                 </div>
             </section>
+            <% if (locals.favorites){ %>
+                <div class="favorites">
+                    <p>FAVORITES WILL BE HERE</p>
+                </div>
+            <% } %>
             <div class="container">
                 <div class="container">
                     <div class="row">
@@ -202,7 +222,11 @@
             <div class="card">
                 <img src="<%= photo%>" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
                 <div class="star-icon">
-                    <i class="fa-solid fa-star"></i>
+                    <% if (locals.favorites){ %>
+                        <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" style="color: gold"></i>
+                    <% } else { %>
+                        <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" ></i>
+                    <% } %>
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title"> <%= name %> </h5>
