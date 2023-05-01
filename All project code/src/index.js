@@ -97,15 +97,29 @@ app.get('/home', (req, res) => {
 
   const query2 = `SELECT AVG(CASE WHEN hr${mtHour} >= 0 THEN hr${mtHour} ELSE NULL END) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
   //i just need name, hr, that's it?
-  const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
+  const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE (name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') OR hr${mtHour} >= 0) AND weekda = ${mtDayOfWeek} LIMIT 40;`;
   const query4 = `SELECT * from user_favorites where user_id = '${req.session.username}'`;
-  console.log(query3);
-  
+  const query5 = `SELECT avg_hr${mtHour} AS total FROM total_average_traffic WHERE weekda=${mtDayOfWeek};`;
+  var number=0;
+  db.any(query5)
+    .then(function(data1){
+      if(data1){
+        number = data1[0].total;
+      }
+      else{
+        number = -2;
+      }
+    })
+    .catch( err => {
+      console.log(err);
+    });
+
   db.any(query3)
     .then(function(data){
       if (data){
         console.log(data);
-        res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+        console.log(number);
+        res.render('pages/home', {loggedIn: req.session.user, rooms: data, total: number});
 
       } else {
         // console.log(data);
