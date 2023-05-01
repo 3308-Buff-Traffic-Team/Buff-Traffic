@@ -98,14 +98,23 @@ app.get('/home', (req, res) => {
   const query2 = `SELECT AVG(CASE WHEN hr${mtHour} >= 0 THEN hr${mtHour} ELSE NULL END) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
   //i just need name, hr, that's it?
   const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
-  const query4 = `SELECT * from user_favorites where user_id = '${req.session.username}'`;
+  const query4 = `SELECT * from user_favorites where user_id = '${req.session.user.user_id}'`;
   console.log(query3);
   
   db.any(query3)
     .then(function(data){
       if (data){
         console.log(data);
-        res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+        db.any(query4)
+        .then((info) => {
+          if (info)
+            res.render('pages/home', {loggedIn: req.session.user, rooms: data, favorites: info});
+          else
+            res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       } else {
         // console.log(data);
@@ -180,6 +189,41 @@ app.post('/login', (req, res) => {
       return res.redirect('/login');
       //return res.status(403).redirect('/login'); // Noam
     });
+});
+
+app.post('/addfavorite', (req,res) =>{
+  const query = `SELECT roomid from traffic where name = '${req.body.name}'`
+  const query2 = `SELECT user_id from users where email = '${req.session.user.email}'`
+  const query3 = `INSERT INTO user_favorites (user_id, roomid) values ($1, $2);`
+  var room_id = undefined;
+  var user_id = undefined;
+  if (req.session.user){
+    db.task('get-everything', task => {
+      return task.batch([
+        task.any(query)
+        ,task.any(query2)
+      ])
+      .then((data) => {
+        room_id = data[0][0].roomid;
+        user_id = data[1][0].user_id;
+        console.log(data[0][0].roomid);
+        console.log(room_id);
+        db.any(query3, [user_id, room_id])
+        .then(info => {
+          console.log("Successfully added to favorites");
+        })
+        .catch(err => {
+          console.log(err);
+          console.log("Could not add to favorites");
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    })
+  } else {
+    console.log("Users must be logged in to add to favorites");
+  }
 });
 
 const auth = (req, res, next) => {
