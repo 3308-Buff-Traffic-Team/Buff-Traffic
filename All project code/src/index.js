@@ -103,7 +103,7 @@ app.get('/home', (req, res) => {
   const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
   console.log(query3);
   if (req.session.user) {
-    const query5 = `SELECT DISTINCT t.name, CASE WHEN uf.user_id IS NOT NULL THEN 'favorite' ELSE 'available' END AS status FROM traffic t LEFT JOIN user_favorites uf ON t.roomid = uf.roomid AND uf.user_id = ${req.session.user.user_id} ORDER BY status DESC, t.name ASC;`;
+    const query5 = `SELECT DISTINCT t.name, CASE WHEN uf.user_id IS NOT NULL THEN 'favorite' ELSE 'available' END AS status FROM traffic t LEFT JOIN user_favorites uf ON t.name = uf.name AND uf.user_id = ${req.session.user.user_id} ORDER BY status DESC, t.name ASC;`;
 
 
     console.log(query5);
@@ -204,6 +204,35 @@ app.post('/login', (req, res) => {
       //return res.status(403).redirect('/login'); // Noam
     });
 });
+
+app.post('/addfavorite', (req,res) =>{
+  // const query = `SELECT roomid from traffic where name = '${req.body.name}'`;
+  const query1 = `SELECT user_id from users where email = '${req.session.user.email}';`;
+  const query2 = `INSERT INTO user_favorites (user_id, name) values ($1, $2);`;
+  var user_id = undefined;
+  
+  if(req.session.user){
+    db.any(query1)
+    .then((data) => {
+      user_id = data[0].user_id;
+      db.any(query2, [user_id, req.body.name])
+      .then(info => {
+        console.log("Successfully added to favorites");
+      })
+      .catch(err => {
+        console.log(err);
+        console.log("Could not add to favorites");
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+  
+    });
+  } else {
+    console.log("Users must be logged in to add to favorites");
+  }
+});
+
 
 const auth = (req, res, next) => {
   if (!req.session.user) {
