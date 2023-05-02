@@ -147,82 +147,35 @@
                     <div class="row">
                         <% if (rooms){ %>
                             <% rooms.forEach((room) => { %>
-                              <% if (room.name) { %>
+                              <% if (room.status == "favorite") { %>
                                 <div class="col-sm-4">
-                                  <%= generateCard(room.name, room.avg_traffic); %>
+                                  <%= generateCard(room.name, room.status, room.avg_traffic); %>
                                 </div>
-                              <% }}); %>
-                              <% } %>
-
-                        <!-- <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../resources/img/RecRockWall.jpg" class="card-img-top"
-                                    alt="Stretching/Ab Area">
-                                <div class="star-icon">
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Rock Wall</h5>
-                                    <p class="card-text">CU's rock climbing wall is a fun way to improve strength
-                                        both physically and mentally!</p>
-                                </div>
-                            </div>
-                            <div class="circle-wrap">
-                                <div class="circle">
-                                    <div class="mask full">
-                                        <div class="fill"></div>
-                                    </div>
-                                    <div class="mask half">
-                                        <div class="fill"></div>
-                                    </div>
-                                    <div class="inside-circle"> 75% </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-sm-4">
-                            <div class="card">
-                                <img src="../../resources/img/RecPool.jpg" class="card-img-top" alt="Yoga Room">
-                                <div class="star-icon">
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Competition Pool</h5>
-                                    <p class="card-text">The pool is a perfect way to end a workout and get some
-                                        extra
-                                        cardio in</p>
-                                </div>
-                            </div>
-                            <div class="circle-wrap">
-                                <div class="circle">
-                                    <div class="mask full">
-                                        <div class="fill"></div>
-                                    </div>
-                                    <div class="mask half">
-                                        <div class="fill"></div>
-                                    </div>
-                                    <div class="inside-circle"> 75% </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-
+                        <% } else { %>
+                        <div class="col-sm-4">
+                            <%= generateCard(room.name, room.status, room.avg_traffic); %>
+                        </div>
+                        <% } }); %>
+                                      <% } %>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                <h1>hello!</h1> 
             </div>
 
           </body>
 
-          <%  function generateCard(name, traffic) { %>
+          <%  function generateCard(name, status, traffic) { %>
             <% if (traffic == null) {traffic = 0} %>
             <% let photo = getPhoto(name)%>
             <% let traffic_ct = getCapacity(name, traffic)%>
             <% let angle = (traffic_ct/100) * 360 %>
 
-
             <div class="card">
                 <img src="<%= photo%>" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
                 <div class="star-icon">
-                    <% if (locals.favorites){ %>
+                    <% if (status == "favorite"){ %>
                         <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" style="color: gold"></i>
                     <% } else { %>
                         <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" ></i>
