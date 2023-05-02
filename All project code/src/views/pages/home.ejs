@@ -113,14 +113,25 @@
         <body style="padding-bottom: 7rem;">
             <script>
                 function toggleStar(name){
+                    var url;
+                    const data = {name : name};
                     const starIcon = document.getElementById(`${name}`);
                     const cardStyle = getComputedStyle(starIcon);
                     const currColor = cardStyle.getPropertyValue('color');
                     if (currColor==='rgb(33, 37, 41)'){
                         starIcon.style.color = 'rgb(255, 215, 0)';
+                        url = '/addfavorite';
+                        fetch(url, {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                        .then(info => {})
+                        .catch(err => {console.log("Could not make request for favorites");});
                     }
                     else if (currColor==='rgb(255, 215, 0)'){
                         starIcon.style.color = 'rgb(33, 37, 41)';
+                        url = '/delfavorite';
                     }
                 }
             </script>
