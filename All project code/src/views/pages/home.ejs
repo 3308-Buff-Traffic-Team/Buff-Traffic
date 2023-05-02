@@ -6,6 +6,14 @@
                     position: relative;
                     bottom: -100%;
                     animation: slide-up 0.75s ease-out forwards;
+                    margin-bottom: 5vh;
+                }
+
+                .progress {
+                  height: 3vh;
+                  margin-bottom: 2vh;
+                  margin-left: 2vw;
+                  margin-right: 2vw;
                 }
 
                 .circle-wrap {
@@ -164,10 +172,6 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <h1>hello world!</h1> 
-            </div>
-
           </body>
 
           <%  function generateCard(name, status, traffic) { %>
@@ -190,18 +194,21 @@
                     <!-- <p class="card-text">The weight room at the rec center is my favorite place to get a
                         good workout</p> -->
                 </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: <%= traffic_ct %>%;" aria-valuenow="<%= traffic_ct %>" aria-valuemin="0" aria-valuemax="100"><%= traffic_ct %>%</div>
+                </div>
             </div>
-            <div class="circle-wrap">
+            <!-- <div class="circle-wrap">
                 <div class="circle">
                     <div class="mask full">
-                        <div class="fill" style="transform: rotate(<%= angle%>deg);"></div>
+                        <div class="fill" style="transform: rotate( angle%>deg);"></div>
                     </div>
                     <div class="mask half">
                         <div class="fill"></div>
                     </div>
-                    <div class="inside-circle"> <%= traffic_ct %>% </div>
+                    <div class="inside-circle">  traffic_ct %>% </div>
                 </div>
-            </div>
+            </div> -->
 
           <%  } %>
 
