@@ -98,43 +98,47 @@ app.get('/home', (req, res) => {
 
   const query2 = `SELECT AVG(CASE WHEN hr${mtHour} >= 0 THEN hr${mtHour} ELSE NULL END) FROM traffic_day WHERE name = 'Rec Center Main Weight Room' AND weekda = ${mtDayOfWeek};`
   //i just need name, hr, that's it?
-  const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
   const query4 = `SELECT * from user_favorites where user_id = '${req.session.username}'`;
-  console.log(query3);
 
+  const query3 = `SELECT name, hr${mtHour} AS avg_traffic FROM traffic WHERE name IN ('Rec Center Main Weight Room', 'Competition Pool', 'Buffalo Pool', 'Level 1 Stretching/Ab Area', 'Squash & Racquetball Courts', 'Mat Room', 'Cycle Studio', 'Turf Gym', 'Pool Overlook Cardio', 'Mind Body Studio', 'Ice Rink', 'Climbing Gym', 'Upper Gym', 'Ping Pong Lounge', 'Lower Gym', 'Front Lobby Cardio Equipment', 'Will Vill - Main Weight Room', 'Dive Well', 'Tennis Court 1', 'Tennis Court 2', 'Tennis Court 3', 'Studio 1', 'Studio 2', 'Studio 3', 'Studio 4W', 'Studio 4F', '2nd Floor TRX Room', '2nd Floor Cardio Balcony', '2nd Floor Fitness Studio') AND weekda = ${mtDayOfWeek} LIMIT 40;`;
+  console.log(query3);
   if (req.session.user) {
-    const query5 = `SELECT users.user_id, traffic.name FROM users INNER JOIN user_favorites ON user_favorites.user_id = users.user_id INNER JOIN traffic ON user_favorites.roomid = traffic.roomid WHERE users.user_id = ${req.session.user.user_id};`;
+    const query5 = `SELECT DISTINCT t.name, CASE WHEN uf.user_id IS NOT NULL THEN 'favorite' ELSE 'available' END AS status FROM traffic t LEFT JOIN user_favorites uf ON t.roomid = uf.roomid AND uf.user_id = ${req.session.user.user_id} ORDER BY status DESC, t.name ASC;`;
+
+
     console.log(query5);
     db.any(query5)
       .then(function(data) {
         if (data) {
           console.log("THIS IS THE DATA FOR FAVORITES", data);
-          res.render('pages/home', { loggedIn: req.session.user, favorites: data });
+          res.render('pages/home', { loggedIn: req.session.user, rooms: data });
         } else {
-          // console.log(data);
           // res.render('pages/home', {loggedIn: req.session.user, favorites: data});
-          //res.render('pages/home', { loggedIn: req.session.user, favorites: [], error: true, message: "Could not load rooms" });
+          res.render('pages/home', { loggedIn: req.session.user, favorites: [], error: true, message: "Could not load rooms" });
         }
       })
       .catch(err => {
         console.log(err);
       });
   }
-  db.any(query3)
-    .then(function(data) {
-      if (data) {
-        console.log("THIS IS THE DATA FOR ALL ROOMS", data);
-        res.render('pages/home', { loggedIn: req.session.user, rooms: data });
-      } else {
-        // console.log(data);
-        // res.render('pages/home', {loggedIn: req.session.user, rooms: data});
-        res.render('pages/home', { loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms" });
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  console.log("This is the end of the home index.js function")
+  // Display all the rooms to the users who are not logged in and do not have favorites
+  else {
+    db.any(query3)
+      .then(function(data) {
+        if (data) {
+          console.log("THIS IS THE DATA FOR ALL ROOMS", data);
+          res.render('pages/home', { loggedIn: req.session.user, rooms: data });
+        } else {
+          // console.log(data);
+          // res.render('pages/home', {loggedIn: req.session.user, rooms: data});
+          res.render('pages/home', { loggedIn: req.session.user, rooms: [], error: true, message: "Could not load rooms" });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    console.log("This is the end of the home index.js function")
+  }
 });
 
 

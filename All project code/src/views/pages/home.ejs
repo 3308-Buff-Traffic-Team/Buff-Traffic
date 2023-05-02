@@ -145,46 +145,37 @@
             <div class="container">
                 <div class="container">
                     <div class="row">
-                        <% if (favorites){ %>
-                            <% favorites.forEach((room) => { %>
-                              <% if (room.name) { %>
+                        <% if (rooms){ %>
+                            <% rooms.forEach((room) => { %>
+                              <% if (room.status == "favorite") { %>
                                 <div class="col-sm-4">
-                                  <%= generateCard(room.name, room.avg_traffic); %>
+                                  <%= generateCard(room.name, room.status, room.avg_traffic); %>
                                 </div>
-                              <% }}); %>
-                              <% } %>
+                        <% } else { %>
+                        <div class="col-sm-4">
+                            <%= generateCard(room.name, room.status, room.avg_traffic); %>
+                        </div>
+                        <% } }); %>
+                                      <% } %>
                     </div>
                 </div>
             </div>
             <div class="container">
                 <h1>hello!</h1> 
-                <div class="container">
-                    <div class="row">
-                        <% if (rooms){ %>
-                            <% rooms.forEach((room) => { %>
-                              <% if (room.name) { %>
-                                <div class="col-sm-4">
-                                  <%= generateCard(room.name, room.avg_traffic); %>
-                                </div>
-                              <% }}); %>
-                              <% } %>
-                    </div>
-                </div>
             </div>
 
           </body>
 
-          <%  function generateCard(name, traffic) { %>
+          <%  function generateCard(name, status, traffic) { %>
             <% if (traffic == null) {traffic = 0} %>
             <% let photo = getPhoto(name)%>
             <% let traffic_ct = getCapacity(name, traffic)%>
             <% let angle = (traffic_ct/100) * 360 %>
 
-
             <div class="card">
                 <img src="<%= photo%>" class="card-img-top" alt="Weight Room"onerror="this.onerror=null; this.src='../../resources/img/BT-Icon-v2.png'">
                 <div class="star-icon">
-                    <% if (locals.favorites){ %>
+                    <% if (status == "favorite"){ %>
                         <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" style="color: gold"></i>
                     <% } else { %>
                         <i class="fa-solid fa-star" id="<%= name %>" onclick="toggleStar(`<%= name %>`)" ></i>
