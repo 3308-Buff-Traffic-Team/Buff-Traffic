@@ -146,22 +146,21 @@
                 <div class="container">
                     <div class="row">
                         <% if (rooms){ %>
+                            <div class="text-center">
+                                <h1>Favorites</h1>
+                                <hr>
+                            </div>
                             <% rooms.forEach((room) => { %>
-                              <% if (room.status == "favorite") { %>
                                 <div class="col-sm-4">
                                   <%= generateCard(room.name, room.status, room.avg_traffic); %>
                                 </div>
-                        <% } else { %>
-                        <div class="col-sm-4">
-                            <%= generateCard(room.name, room.status, room.avg_traffic); %>
-                        </div>
-                        <% } }); %>
-                                      <% } %>
+                        <% } ) %>
+                                      <% }; %>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <h1>hello!</h1> 
+                <h1>hello world!</h1> 
             </div>
 
           </body>
