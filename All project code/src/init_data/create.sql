@@ -94,7 +94,8 @@ CREATE TABLE IF NOT EXISTS traffic_day (
 CREATE TABLE IF NOT EXISTS user_favorites (
   user_favorites_id SERIAL PRIMARY KEY,   /* the primary key for each entry */
   user_id SMALLINT NOT NULL,
-  roomid SMALLINT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (roomid) REFERENCES traffic(roomid)
+  /*roomid SMALLINT NOT NULL,*/
+  name varchar(50) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  /*FOREIGN KEY (roomid) REFERENCES traffic(roomid)*/
 );
