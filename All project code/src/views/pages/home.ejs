@@ -6,6 +6,14 @@
                     position: relative;
                     bottom: -100%;
                     animation: slide-up 0.75s ease-out forwards;
+                    margin-bottom: 5vh;
+                }
+
+                .progress {
+                  height: 3vh;
+                  margin-bottom: 2vh;
+                  margin-left: 2vw;
+                  margin-right: 2vw;
                 }
 
                 .circle-wrap {
@@ -192,10 +200,12 @@
                                       <% } %>
                     </div>
                 </div>
+
             <div class="container">
                 <h1>hello world!</h1> 
             </div>
 
+            </div>
           </body>
 
           <%  function generateCard(name, status, traffic) { %>
@@ -218,18 +228,21 @@
                     <!-- <p class="card-text">The weight room at the rec center is my favorite place to get a
                         good workout</p> -->
                 </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: <%= traffic_ct %>%;" aria-valuenow="<%= traffic_ct %>" aria-valuemin="0" aria-valuemax="100"><%= traffic_ct %>%</div>
+                </div>
             </div>
-            <div class="circle-wrap">
+            <!-- <div class="circle-wrap">
                 <div class="circle">
                     <div class="mask full">
-                        <div class="fill" style="transform: rotate(<%= angle%>deg);"></div>
+                        <div class="fill" style="transform: rotate( angle%>deg);"></div>
                     </div>
                     <div class="mask half">
                         <div class="fill"></div>
                     </div>
-                    <div class="inside-circle"> <%= traffic_ct %>% </div>
+                    <div class="inside-circle">  traffic_ct %>% </div>
                 </div>
-            </div>
+            </div> -->
 
           <%  } %>
 
@@ -313,6 +326,59 @@
                 return "../../resources/img/RecPool.jpg";
               case ('Climbing Gym'):
                 return "../../resources/img/RecRockWall.jpg";
+              case ('Turf Gym'):
+                return "../../resources/img/turf.jpg";
+              case ('Tennis Court 1'):
+                return "../../resources/img/tennis.jpg";
+              case ('Tennis Court 2'):
+                return "../../resources/img/tennis.jpg";
+              case ('Tennis Court 3'):
+                return "../../resources/img/tennis.jpg";
+              case ('Ping Pong Lounge'):
+                return "../../resources/img/pingpong.jpg";
+              case ('Level 1 Stretching/Ab Area'):
+                return "../../resources/img/lowerab.jpg";
+              case ('Mat Room'):
+                return "../../resources/img/multipurposemattroom.jpg";
+              case ('Buffalo Pool'):
+                return "../../resources/img/buffpool.jpg";
+              case ('Ice Rink'):
+                return "../../resources/img/icerink.jpg";
+              case ('Dive Well'):
+                return "../../resources/img/divewell.jpg";
+              case ('Lower Gym'):
+                return "../../resources/img/lowergym.jpg";
+              case ('Upper Gym'):
+                return "../../resources/img/uppergym.jpg";
+              case ('Cycle Studio'):
+                return "../../resources/img/spinroom.jpg";
+              case ('Studio 1'):
+                return "../../resources/img/studio2.jpg";
+              case ('Studio 2'):
+                return "../../resources/img/studio2.jpg";
+              case ('Studio 3'):
+                return "../../resources/img/studio2.jpg";
+              case ('Studio 4F'):
+                return "../../resources/img/studio2.jpg";
+              case ('Studio 4W'):
+                return "../../resources/img/studio2.jpg";
+              case ('Pool Overlook Cardio'):
+                return "../../resources/img/poolcardio.jpg";
+              case ('Front Lobby Cardio Equipment'):
+                return "../../resources/img/cardio.jpg";
+              case ('Will Vill - Main Weight Room'):
+                return "../../resources/img/willvill.jpg";
+              case ('Mind Body Studio'):
+                return "../../resources/img/willvill.jpg";
+              case ('2nd Floor Cardio Balcony'):
+                return "../../resources/img/uppercardio.jpg";
+              case ('2nd Floor TRX Room'):
+                return "../../resources/img/cal.jpg";
+              case ('2nd Floor Fitness Studio'):
+                return "../../resources/img/studio4.jpg";
+              case ('Squash & Racquetball Courts'):
+                return "../../resources/img/squash.jpg";
+
               default:
                 return "../../resources/img/BT-Icon-v2.png";
             }
