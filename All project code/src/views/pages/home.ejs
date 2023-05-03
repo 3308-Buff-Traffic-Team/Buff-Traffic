@@ -140,6 +140,13 @@
                     else if (currColor==='rgb(255, 215, 0)'){
                         starIcon.style.color = 'rgb(33, 37, 41)';
                         url = '/delfavorite';
+                        fetch(url, {
+                            method: 'DELETE',
+                            body: JSON.stringify(data),
+                            headers: { 'Content-Type': 'application/json'}
+                        })
+                        .then((info) => {})
+                        .catch(err => {console.log(err);})
                     }
                 }
             </script>
@@ -161,27 +168,43 @@
                     <p>FAVORITES WILL BE HERE</p>
                 </div>
             <% } %>
-            <div class="container">
                 <div class="container">
                     <div class="row">
                         <% if (rooms){ %>
                             <div class="text-center">
                                 <h1>Favorites</h1>
-                                <hr>
                             </div>
                             <% rooms.forEach((room) => { %>
                               <% if (room.status == "favorite") { %>
                                 <div class="col-sm-4">
                                   <%= generateCard(room.name, room.status, room.avg_traffic); %>
                                 </div>
-                        <% } else { %>
-                        <div class="col-sm-4">
-                            <%= generateCard(room.name, room.status, room.avg_traffic); %>
-                        </div>
-                        <% } }); %>
+                        <% } %>
+                        <% }); %>
                                       <% } %>
                     </div>
                 </div>
+                <div class="container">
+                    <div class="row">
+                        <% if (rooms){ %>
+                            <div class="text-center">
+                                <hr>
+                            </div>
+                            <% rooms.forEach((room) => { %>
+                              <% if (room.status != "favorite") { %>
+                                <div class="col-sm-4">
+                                  <%= generateCard(room.name, room.status, room.avg_traffic); %>
+                                </div>
+                        <% } %>
+                        <% }); %>
+                                      <% } %>
+                    </div>
+                </div>
+
+            <div class="container">
+                <h1>hello world!</h1> 
+            </div>
+
             </div>
           </body>
 

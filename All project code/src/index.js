@@ -233,6 +233,32 @@ app.post('/addfavorite', (req,res) =>{
   }
 });
 
+app.delete('/delfavorite', (req,res) => {
+  const query1 = `SELECT user_id from users where email = '${req.session.user.email}';`;
+  var user_id;
+  if (req.session.user){
+    db.any(query1)
+    .then((data) => {
+      user_id = data[0].user_id;
+      const query2 = `DELETE FROM user_favorites WHERE (user_id = '${user_id}' and name = '${req.body.name}');`;
+      db.any(query2)
+      .then((info) => {
+        console.log("Successfully removed room from favorites");
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("Failed to remove room from favorites");
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log("Could not obtain required info to remove from favorites");
+    });
+
+  } else {
+    console.log("Users must be logged in to delete favorites");
+  }
+});
 
 const auth = (req, res, next) => {
   if (!req.session.user) {
