@@ -116,7 +116,7 @@ app.get('/home', (req, res) => {
   const query4 = `SELECT * from user_favorites where user_id = '${req.session.username}'`;
   console.log(query3);
   if (req.session.user) {
-    const query5 = `SELECT DISTINCT t.name, CASE WHEN uf.user_id IS NOT NULL THEN 'favorite' ELSE 'available' END AS status FROM traffic t LEFT JOIN user_favorites uf ON t.name = uf.name AND uf.user_id = ${req.session.user.user_id} ORDER BY status DESC, t.name ASC;`;
+    const query5 = `SELECT DISTINCT t.name, t.hr${mtHour} AS avg_traffic, CASE WHEN uf.user_id IS NOT NULL THEN 'favorite' ELSE 'available' END AS status FROM traffic t LEFT JOIN user_favorites uf ON t.name = uf.name AND uf.user_id = ${req.session.user.user_id} AND t.weekda = ${mtDayOfWeek} WHERE weekda = ${mtDayOfWeek} ORDER BY status DESC, hr${mtHour} DESC NULLS LAST, t.name ASC;`;
 
 
     console.log(query5);
